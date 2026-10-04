@@ -4,3 +4,19 @@ version: "2"
 
 linters:
   default: standard
+  enable:
+    - funlen
+    - gocognit
+    - gocyclo
+    - nestif
+  settings:
+    funlen:
+      statements: 60
+    # Raised to the current maximum in the tree: openapi.go's
+    # useProblemMediaType is 28 and the lifecycle test is 13.
+    gocognit:
+      min-complexity: 28
+    gocyclo:
+      min-complexity: 13
+    nestif:
+      min-complexity: 4
