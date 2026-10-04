@@ -184,9 +184,19 @@ func TestInvalidBodiesReturnBadRequest(t *testing.T) {
 		{"malformed json", `{"name": "Broken"`},
 	}
 	for _, testCase := range cases {
-		status, _, _ := client.do(http.MethodPost, "/items", testCase.body)
+		status, header, body := client.do(http.MethodPost, "/items", testCase.body)
 		if status != http.StatusBadRequest {
 			t.Fatalf("POST /items with %s status = %d, want 400", testCase.name, status)
+		}
+		if contentType := header.Get("Content-Type"); !strings.Contains(contentType, "application/problem+json") {
+			t.Fatalf("POST /items with %s Content-Type = %q, want application/problem+json", testCase.name, contentType)
+		}
+		problem := client.decode(body)
+		if problem["type"] != "about:blank" || problem["title"] != "Validation failed" {
+			t.Fatalf("POST /items with %s problem = %v", testCase.name, problem)
+		}
+		if problem["status"].(float64) != 400 {
+			t.Fatalf("POST /items with %s problem status = %v, want 400", testCase.name, problem["status"])
 		}
 	}
 }
