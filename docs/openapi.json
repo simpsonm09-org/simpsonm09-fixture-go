@@ -17,6 +17,9 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "name"
+                ],
                 "type": "object"
             },
             "api.ItemResponse": {
@@ -38,6 +41,11 @@
                         "type": "string"
                     }
                 },
+                "required": [
+                    "description",
+                    "id",
+                    "name"
+                ],
                 "type": "object"
             },
             "api.Problem": {
@@ -143,6 +151,7 @@
                         "name": "id",
                         "required": true,
                         "schema": {
+                            "format": "int64",
                             "type": "integer"
                         }
                     }
@@ -175,6 +184,7 @@
                         "name": "id",
                         "required": true,
                         "schema": {
+                            "format": "int64",
                             "type": "integer"
                         }
                     }
@@ -214,6 +224,7 @@
                         "name": "id",
                         "required": true,
                         "schema": {
+                            "format": "int64",
                             "type": "integer"
                         }
                     }

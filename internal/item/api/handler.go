@@ -48,7 +48,7 @@ func (h *ItemHandler) list(c *gin.Context) {
 // @Summary      Get one item by id
 // @Tags         Items
 // @Produce      json
-// @Param        id   path      int64  true  "Item id"
+// @Param        id   path      int64  true  "Item id"  format(int64)
 // @Success      200  {object}  api.ItemResponse
 // @Failure      404  {object}  api.Problem  "Item not found"
 // @Router       /items/{id} [get]
@@ -90,7 +90,7 @@ func (h *ItemHandler) create(c *gin.Context) {
 // @Tags         Items
 // @Accept       json
 // @Produce      json
-// @Param        id       path      int64            true  "Item id"
+// @Param        id       path      int64            true  "Item id"  format(int64)
 // @Param        request  body      api.ItemRequest  true  "Item to store"
 // @Success      200      {object}  api.ItemResponse
 // @Failure      400      {object}  api.Problem  "Validation failed"
@@ -118,7 +118,7 @@ func (h *ItemHandler) update(c *gin.Context) {
 //
 // @Summary      Delete an item
 // @Tags         Items
-// @Param        id   path  int64  true  "Item id"
+// @Param        id   path  int64  true  "Item id"  format(int64)
 // @Success      204  "Item deleted"
 // @Failure      404  {object}  api.Problem  "Item not found"
 // @Router       /items/{id} [delete]
