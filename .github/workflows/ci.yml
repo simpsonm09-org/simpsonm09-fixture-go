@@ -50,8 +50,6 @@ jobs:
         run: |
           just spec
           git diff --exit-code -- docs/openapi.json
-      - name: Test
-        run: just test
       - name: Tests with coverage
         run: just coverage
       - name: Patch coverage

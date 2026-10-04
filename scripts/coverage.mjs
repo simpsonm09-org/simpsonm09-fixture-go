@@ -8,7 +8,7 @@ import { convert } from './coverprofile-to-lcov.mjs';
 
 mkdirSync('coverage', { recursive: true });
 
-const result = spawnSync('go', ['test', './...', '-coverprofile=coverage/cover.out'], {
+const result = spawnSync('go', ['test', './...', '-coverprofile=coverage/cover.out', '-coverpkg=./...'], {
   stdio: 'inherit',
 });
 if (result.error) {
