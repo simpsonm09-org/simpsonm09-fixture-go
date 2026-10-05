@@ -12,11 +12,10 @@ linters:
   settings:
     funlen:
       statements: 60
-    # Raised to the current maximum in the tree: openapi.go's
-    # useProblemMediaType is 28 and the lifecycle test is 13.
+    # Fleet defaults. Keep every function at or below these thresholds.
     gocognit:
-      min-complexity: 28
+      min-complexity: 15
     gocyclo:
-      min-complexity: 13
+      min-complexity: 10
     nestif:
       min-complexity: 4

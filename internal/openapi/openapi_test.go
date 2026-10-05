@@ -117,21 +117,40 @@ func assertProblemJSON(t *testing.T, document generatedDocument) {
 	t.Helper()
 	errorResponses := 0
 	for path, operations := range document.Paths {
-		for method, operation := range operations {
-			for status, response := range operation.Responses {
-				if len(status) == 0 || (status[0] != '4' && status[0] != '5') {
-					continue
-				}
-				errorResponses++
-				if _, ok := response.Content["application/problem+json"]; !ok {
-					t.Errorf("%s %s %s content = %v, want application/problem+json", method, path, status, keysOf(response.Content))
-				}
-			}
-		}
+		errorResponses += assertProblemJSONForPath(t, path, operations)
 	}
 	if errorResponses == 0 {
 		t.Fatal("generated document has no error responses to check")
 	}
+}
+
+func assertProblemJSONForPath(t *testing.T, path string, operations map[string]struct {
+	Responses map[string]struct {
+		Content map[string]json.RawMessage `json:"content"`
+	} `json:"responses"`
+}) int {
+	t.Helper()
+	errorResponses := 0
+	for method, operation := range operations {
+		for status, response := range operation.Responses {
+			if !isErrorStatus(status) {
+				continue
+			}
+			errorResponses++
+			if _, ok := response.Content["application/problem+json"]; !ok {
+				t.Errorf("%s %s %s content = %v, want application/problem+json", method, path, status, keysOf(response.Content))
+			}
+		}
+	}
+	return errorResponses
+}
+
+// isErrorStatus reports whether an OpenAPI response status is a 4xx or 5xx.
+func isErrorStatus(status string) bool {
+	if len(status) == 0 {
+		return false
+	}
+	return status[0] == '4' || status[0] == '5'
 }
 
 func keysOf(content map[string]json.RawMessage) []string {
