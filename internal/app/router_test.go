@@ -90,44 +90,44 @@ func TestCreateReadUpdateDeleteLifecycle(t *testing.T) {
 	client := newClient(t)
 
 	status, _, body := client.do(http.MethodPost, "/items", `{"name":"Widget","description":"A small widget"}`)
-	if status != http.StatusCreated {
-		t.Fatalf("POST /items status = %d, want 201", status)
-	}
+	requireStatus(t, status, http.StatusCreated, "POST /items")
 	created := client.decode(body)
 	id := int64(created["id"].(float64))
 	if id <= 0 {
 		t.Fatalf("created id = %d, want positive", id)
 	}
-	if created["name"] != "Widget" || created["description"] != "A small widget" {
-		t.Fatalf("created = %v", created)
-	}
+	requireFields(t, created, map[string]any{"name": "Widget", "description": "A small widget"})
 
 	status, _, body = client.do(http.MethodGet, "/items/"+itoa(id), "")
-	if status != http.StatusOK {
-		t.Fatalf("GET /items/%d status = %d, want 200", id, status)
-	}
+	requireStatus(t, status, http.StatusOK, "GET /items/"+itoa(id))
 	one := client.decode(body)
-	if one["id"].(float64) != float64(id) || one["name"] != "Widget" {
-		t.Fatalf("GET /items/%d = %v", id, one)
-	}
+	requireFields(t, one, map[string]any{"id": float64(id), "name": "Widget"})
 
 	status, _, body = client.do(http.MethodPut, "/items/"+itoa(id), `{"name":"Renamed","description":"Still here"}`)
-	if status != http.StatusOK {
-		t.Fatalf("PUT /items/%d status = %d, want 200", id, status)
-	}
+	requireStatus(t, status, http.StatusOK, "PUT /items/"+itoa(id))
 	updated := client.decode(body)
-	if updated["name"] != "Renamed" || updated["description"] != "Still here" {
-		t.Fatalf("PUT /items/%d = %v", id, updated)
-	}
+	requireFields(t, updated, map[string]any{"name": "Renamed", "description": "Still here"})
 
 	status, _, _ = client.do(http.MethodDelete, "/items/"+itoa(id), "")
-	if status != http.StatusNoContent {
-		t.Fatalf("DELETE /items/%d status = %d, want 204", id, status)
-	}
+	requireStatus(t, status, http.StatusNoContent, "DELETE /items/"+itoa(id))
 
 	status, _, _ = client.do(http.MethodGet, "/items/"+itoa(id), "")
-	if status != http.StatusNotFound {
-		t.Fatalf("GET deleted item status = %d, want 404", status)
+	requireStatus(t, status, http.StatusNotFound, "GET deleted item")
+}
+
+func requireStatus(t *testing.T, got, want int, what string) {
+	t.Helper()
+	if got != want {
+		t.Fatalf("%s status = %d, want %d", what, got, want)
+	}
+}
+
+func requireFields(t *testing.T, got map[string]any, want map[string]any) {
+	t.Helper()
+	for key, value := range want {
+		if got[key] != value {
+			t.Fatalf("field %q = %v, want %v (in %v)", key, got[key], value, got)
+		}
 	}
 }
 

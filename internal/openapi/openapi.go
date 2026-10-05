@@ -90,37 +90,46 @@ func useProblemMediaType(document map[string]any) {
 		return
 	}
 	for _, pathValue := range paths {
-		pathItem, ok := pathValue.(map[string]any)
-		if !ok {
-			continue
-		}
-		for _, operationValue := range pathItem {
-			operation, ok := operationValue.(map[string]any)
-			if !ok {
-				continue
-			}
-			responses, ok := operation["responses"].(map[string]any)
-			if !ok {
-				continue
-			}
-			for status, responseValue := range responses {
-				response, ok := responseValue.(map[string]any)
-				if !ok || !isErrorStatus(status) {
-					continue
-				}
-				content, ok := response["content"].(map[string]any)
-				if !ok {
-					continue
-				}
-				media, ok := content[jsonMediaType]
-				if !ok {
-					continue
-				}
-				delete(content, jsonMediaType)
-				content[problemMediaType] = media
-			}
+		if pathItem, ok := pathValue.(map[string]any); ok {
+			useProblemMediaTypeForPathItem(pathItem)
 		}
 	}
+}
+
+func useProblemMediaTypeForPathItem(pathItem map[string]any) {
+	for _, operationValue := range pathItem {
+		if operation, ok := operationValue.(map[string]any); ok {
+			useProblemMediaTypeForOperation(operation)
+		}
+	}
+}
+
+func useProblemMediaTypeForOperation(operation map[string]any) {
+	responses, ok := operation["responses"].(map[string]any)
+	if !ok {
+		return
+	}
+	for status, responseValue := range responses {
+		if response, ok := responseValue.(map[string]any); ok {
+			useProblemMediaTypeForResponse(status, response)
+		}
+	}
+}
+
+func useProblemMediaTypeForResponse(status string, response map[string]any) {
+	if !isErrorStatus(status) {
+		return
+	}
+	content, ok := response["content"].(map[string]any)
+	if !ok {
+		return
+	}
+	media, ok := content[jsonMediaType]
+	if !ok {
+		return
+	}
+	delete(content, jsonMediaType)
+	content[problemMediaType] = media
 }
 
 func componentSchemas(document map[string]any) []map[string]any {
