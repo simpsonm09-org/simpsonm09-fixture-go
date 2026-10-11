@@ -10,6 +10,7 @@ mkdirSync('coverage', { recursive: true });
 
 const result = spawnSync('go', ['test', './...', '-coverprofile=coverage/cover.out', '-coverpkg=./...'], {
   stdio: 'inherit',
+  windowsHide: true,
 });
 if (result.error) {
   process.stderr.write(`coverage: cannot run go: ${result.error.message}\n`);
