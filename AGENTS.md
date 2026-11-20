@@ -1,4 +1,4 @@
-# simpsonm09-fixture-go working agreements
+# fixture-go working agreements
 
 A layered Go item CRUD service built on Gin. It is the Go fixture for the fleet standard.
 

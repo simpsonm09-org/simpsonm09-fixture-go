@@ -1,6 +1,6 @@
 package api
 
-import "github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/domain"
+import "github.com/simpsonm09-projects/fixture-go/internal/item/domain"
 
 // toResponse maps a domain item to its transport shape.
 func toResponse(item domain.Item) ItemResponse {

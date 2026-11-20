@@ -4,9 +4,9 @@ package app
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/api"
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/service"
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/store"
+	"github.com/simpsonm09-projects/fixture-go/internal/item/api"
+	"github.com/simpsonm09-projects/fixture-go/internal/item/service"
+	"github.com/simpsonm09-projects/fixture-go/internal/item/store"
 )
 
 // NewRouter builds a Gin engine with the item routes, a fresh in-memory store

@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/app"
+	"github.com/simpsonm09-projects/fixture-go/internal/app"
 )
 
 type apiClient struct {

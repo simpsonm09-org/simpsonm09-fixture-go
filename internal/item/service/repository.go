@@ -1,6 +1,6 @@
 package service
 
-import "github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/domain"
+import "github.com/simpsonm09-projects/fixture-go/internal/item/domain"
 
 // ItemRepository is the store port the service depends on. It speaks the
 // domain type, so the service never sees a store record and the adapter can be
