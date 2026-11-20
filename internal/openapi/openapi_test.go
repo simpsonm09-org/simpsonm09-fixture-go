@@ -8,7 +8,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/openapi"
+	"github.com/simpsonm09-projects/fixture-go/internal/openapi"
 )
 
 // TestCommittedDocumentMatchesGenerator regenerates docs/openapi.json from the

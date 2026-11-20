@@ -7,8 +7,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/domain"
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/service"
+	"github.com/simpsonm09-projects/fixture-go/internal/item/domain"
+	"github.com/simpsonm09-projects/fixture-go/internal/item/service"
 )
 
 // ItemHandler serves the item CRUD endpoints. It speaks DTOs and delegates to

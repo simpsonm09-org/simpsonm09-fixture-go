@@ -1,6 +1,6 @@
 # Documentation
 
-Index for the `simpsonm09-fixture-go` service, a layered Go item CRUD API built on Gin.
+Index for the `fixture-go` service, a layered Go item CRUD API built on Gin.
 
 ## Guides
 

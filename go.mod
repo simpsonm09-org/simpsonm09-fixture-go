@@ -1,4 +1,4 @@
-module github.com/simpsonm09-org/simpsonm09-fixture-go
+module github.com/simpsonm09-projects/fixture-go
 
 go 1.27.1
 

@@ -3,8 +3,8 @@ package store_test
 import (
 	"testing"
 
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/domain"
-	"github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/store"
+	"github.com/simpsonm09-projects/fixture-go/internal/item/domain"
+	"github.com/simpsonm09-projects/fixture-go/internal/item/store"
 )
 
 func ptr(value string) *string { return &value }

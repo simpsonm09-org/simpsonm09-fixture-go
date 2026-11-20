@@ -1,8 +1,8 @@
-# simpsonm09-fixture-go
+# fixture-go
 
 A Go item CRUD service built on Gin. It is the Go fixture for the simpsonm09 fleet standard.
 
-This repository lives in `simpsonm09-projects/simpsonm09-fixture-go`. Work happens on a branch
+This repository lives in `simpsonm09-projects/fixture-go`. Work happens on a branch
 with a pull request into `main`.
 See [`repo-standard`](https://github.com/simpsonm09-projects/simpsonm09-repo-standard)
 for the branch model and the protection rules.

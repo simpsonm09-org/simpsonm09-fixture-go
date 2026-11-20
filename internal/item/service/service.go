@@ -3,7 +3,7 @@
 // store record.
 package service
 
-import "github.com/simpsonm09-org/simpsonm09-fixture-go/internal/item/domain"
+import "github.com/simpsonm09-projects/fixture-go/internal/item/domain"
 
 // ItemService applies the item rules over the repository port.
 type ItemService struct {
