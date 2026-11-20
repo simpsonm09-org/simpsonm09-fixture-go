@@ -4,7 +4,7 @@ A Go item CRUD service built on Gin. It is the Go fixture for the simpsonm09 fle
 
 This repository lives in `simpsonm09-projects/fixture-go`. Work happens on a branch
 with a pull request into `main`.
-See [`repo-standard`](https://github.com/simpsonm09-projects/simpsonm09-repo-standard)
+See [`repo-standard`](https://github.com/simpsonm09-projects/repo-standard)
 for the branch model and the protection rules.
 
 ## What it does
